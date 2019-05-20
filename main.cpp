@@ -7,7 +7,6 @@ private:
     int head;
     int capacity;
     T *storage;
-    T *tmp;
 
 public:
 
@@ -15,7 +14,6 @@ public:
         if (_capacity <= 0)
             cout << "Error in stack's size" << endl;
         storage = new T[_capacity];
-        tmp = new T;
         capacity = _capacity;
         head = -1;
     }
@@ -28,11 +26,8 @@ public:
     }
 
     T pop() {
-        if (!isEmpty()) {
-            *tmp = storage[head];
-            head--;
-        }
-        return *tmp;
+        if (!isEmpty())
+            return storage[--head];
     }
 
     bool isEmpty() {
@@ -48,8 +43,7 @@ public:
         }
     }
 
-     ~Stack() {
-        delete tmp;
+    ~Stack() {
         delete []storage;
     }
 
@@ -69,6 +63,7 @@ int main() {
 
     cout << "Head = " << myStack.pop() << endl;
     myStack.pop();
+    myStack.print();
     myStack.pop();
     myStack.pop();
     myStack.print();
